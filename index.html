@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaundryHub - Laundry Antar Jemput</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --blue: #00AA5B;
+      --blue2: #008E4D;
+      --navy: #006838;
+      --soft: #F1FFF6;
+      --soft2: #D9F7E5;
+      --text: #0E3F26;
+      --muted: #5E9274;
+      --white: #ffffff;
+      --border: #B8E5CB;
+      --green: #00AA5B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background: #f4fff8;
+      line-height: 1.65;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1180px, 88%);
+      margin: auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: #fff;
+      height: 90px;
+      border-bottom: 1px solid #d6e8f5;
+    }
+
+    .nav-wrap {
+      height: 90px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand h2 {
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .brand p {
+      font-size: 14px;
+      color: #6f9b80;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: #6f9b80;
+      font-size: 17px;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      color: var(--navy);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      padding: 13px 25px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #246b45;
+      border: 1.5px solid var(--blue);
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #e4fbea, #f4fff8);
+      position: relative;
+      overflow: hidden;
+      padding: 25px 0 28px;
+    }
+
+    .hero:before,
+    .hero:after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: #b9dff3;
+      filter: blur(5px);
+      opacity: .65;
+    }
+
+    .hero:before {
+      width: 210px;
+      height: 210px;
+      right: 30px;
+      top: -20px;
+    }
+
+    .hero:after {
+      width: 170px;
+      height: 170px;
+      left: -70px;
+      bottom: -50px;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 60px;
+      align-items: center;
+      min-height: 560px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #cfeedd;
+      color: #246b45;
+      border-radius: 999px;
+      padding: 9px 18px;
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      line-height: 1.45;
+      font-weight: 800;
+      max-width: 650px;
+    }
+
+    .hero h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #6f9b80;
+      margin: 22px 0;
+      max-width: 600px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      margin: 20px 0 16px;
+    }
+
+    .mini-tags {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .mini-tags span {
+      background: #d9f7e5;
+      border-radius: 999px;
+      padding: 8px 15px;
+      color: #246b45;
+    }
+
+    .note {
+      display: flex;
+      gap: 18px;
+      color: #6f9b80;
+      margin-top: 14px;
+    }
+
+    .hero-img {
+      position: relative;
+    }
+
+    .photo {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .status-card {
+      position: absolute;
+      right: -35px;
+      bottom: -15px;
+      background: white;
+      padding: 18px 22px;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(26,54,93,.15);
+      width: 285px;
+    }
+
+    .status-card small {
+      letter-spacing: 3px;
+      color: #246b45;
+    }
+
+    .progress {
+      height: 8px;
+      background: #d8edf9;
+      border-radius: 50px;
+      margin: 12px 0;
+    }
+
+    .progress div {
+      height: 8px;
+      width: 58%;
+      background: var(--blue);
+      border-radius: 50px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(30,73,114,.08);
+    }
+
+    .stat b {
+      font-size: 23px;
+      color: #246b45;
+    }
+
+    .section-soft {
+      background: #f4fff8;
+    }
+
+    .section-blue {
+      background: #e4fbea;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title small {
+      letter-spacing: 5px;
+      color: #246b45;
+    }
+
+    .section-title h2 {
+      font-size: 31px;
+      line-height: 1.3;
+    }
+
+    .promo-card,
+    .price-card,
+    .step-card,
+    .feature-card,
+    .testi-card,
+    .faq-item {
+      background: #fff;
+      border: 1.4px solid var(--border);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 28px rgba(31,80,125,.06);
+    }
+
+    .promo-label,
+    .pill {
+      display: inline-block;
+      background: #d9f7e5;
+      color: #246b45;
+      border-radius: 999px;
+      padding: 5px 14px;
+      letter-spacing: 3px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .promo-card h3 {
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .muted {
+      color: #6f9b80;
+    }
+
+    .promo-meta {
+      display: flex;
+      gap: 20px;
+      color: #6f9b80;
+      margin: 12px 0;
+    }
+
+    .promo-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promo-track {
+      display: flex;
+      transition: transform 0.45s ease;
+    }
+
+    .promo-slide {
+      min-width: 100%;
+    }
+
+    .promo-arrows {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .promo-arrow {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: var(--blue);
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .promo-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .promo-dots span {
+      width: 9px;
+      height: 9px;
+      background: #1b1f39;
+      border-radius: 50%;
+      opacity: .8;
+    }
+
+    .promo-dots span.active {
+      width: 24px;
+      border-radius: 99px;
+      background: var(--blue);
+    }
+
+    .promo-card .btn {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .slider-nav {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .slider-nav span {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background: #1b1f39;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+
+    .slider-nav span.active {
+      width: 23px;
+      border-radius: 99px;
+      background: #2b79c2;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .cards-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      margin-top: 25px;
+    }
+
+    .price-card.favorite {
+      border: 1.8px solid var(--blue);
+    }
+
+    .price-top {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .emoji {
+      font-size: 34px;
+    }
+
+    .price-card h3 {
+      font-size: 22px;
+    }
+
+    .price {
+      font-size: 25px;
+      font-weight: 700;
+      color: #246b45;
+    }
+
+    .price-card ul {
+      margin: 14px 0 16px 20px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .num {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #57C785;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card i {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #57C785;
+      color: white;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+    }
+
+    .order {
+      background: linear-gradient(115deg, #57c785, #246b45);
+      color: #fff;
+    }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .order h2 {
+      font-size: 33px;
+    }
+
+    .order p {
+      font-size: 19px;
+      margin: 10px 0 20px;
+    }
+
+    .order ul {
+      list-style: none;
+    }
+
+    .order li {
+      margin: 8px 0;
+    }
+
+    .form-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.25);
+      padding: 24px;
+      border-radius: 22px;
+    }
+
+    .form-card label {
+      display: block;
+      font-weight: 600;
+      margin: 12px 0 6px;
+    }
+
+    .form-card input,
+    .form-card select,
+    .form-card textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: none;
+      font: inherit;
+    }
+
+    .form-card textarea {
+      height: 86px;
+    }
+
+    .form-card .btn {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 50px;
+    }
+
+    .about h2 {
+      font-size: 31px;
+    }
+
+    .about p {
+      font-size: 20px;
+    }
+
+    .about li {
+      margin-left: 20px;
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #57c785;
+      display: grid;
+      place-items: center;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .faq-item summary:after {
+      content: '⌄';
+      font-size: 24px;
+      color: #5d8ccc;
+    }
+
+    .faq-item p {
+      color: #7397c8;
+      margin-top: 10px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .map {
+      height: 260px;
+      border-radius: 20px;
+      background: #d9f7e5;
+      display: grid;
+      place-items: center;
+      color: #246b45;
+      text-align: center;
+    }
+
+    .contact p {
+      font-size: 19px;
+    }
+
+    .contact-line {
+      margin-top: 14px;
+    }
+
+    .contact-line div {
+      margin: 9px 0;
+    }
+
+    .footer {
+      background: #f8fbff;
+      padding: 20px 0;
+      color: #246b45;
+    }
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer a {
+      margin-left: 20px;
+    }
+
+    .wa-float {
+      position: fixed;
+      right: 38px;
+      bottom: 30px;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: var(--green);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 34px;
+      z-index: 1000;
+      box-shadow: 0 0 0 14px rgba(34,197,94,.22);
+    }
+
+    @media(max-width:900px) {
+      .menu {
+        display: none;
+      }
+
+      .hero-grid,
+      .order-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-3,
+      .cards-2,
+      .steps,
+      .feature-grid,
+      .stats,
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .status-card {
+        position: static;
+        margin-top: 15px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .photo {
+        height: 240px;
+      }
+
+      .wa-float {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+      }
+
+      .footer-wrap {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand">
+        <div class="logo">
+          <img src="img/logo.png", alt="LaundryHub Logo">
+        </div>
+        <div>
+          <h2>LaundryHub</h2>
+          <p>Laundry Antar Jemput</p>
+        </div>
+      </a>
+
+      <nav class="menu">
+        <a href="#home">Home</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#order">Order</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontak">Kontak</a>
+        <a class="btn" href="#order">Pesan Sekarang</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">
+          <i class="fa-solid fa-bolt"></i>
+          Laundry antar jemput untuk hidup yang lebih praktis
+        </div>
+
+        <h1>Laundry <span>Antar Jemput</span> khusus buat kamu yang super sibuk.</h1>
+
+        <p>
+          LaundryHub menjemput, mencuci, menyetrika, dan mengantarkan kembali pakaianmu.
+          Cocok untuk mahasiswa, pekerja, dan keluarga muda yang ingin hemat waktu tanpa ribet.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="https://wa.me/6281234567890" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Pesan via WhatsApp
+          </a>
+          <a class="btn btn-outline" href="#layanan">Lihat paket & harga</a>
+        </div>
+
+        <div class="mini-tags">
+          <span><i class="fa-solid fa-truck-fast"></i> Jemput–antar di hari yang sama*</span>
+          <span><i class="fa-solid fa-shirt"></i> Cuci, kering, setrika rapi</span>
+          <span><i class="fa-solid fa-credit-card"></i> Pembayaran cashless</span>
+        </div>
+
+        <div class="note">
+          <span><i class="fa-regular fa-clock"></i> Hemat 3–5 jam per minggu</span>
+          <span><i class="fa-solid fa-location-dot"></i> Area campus & kos-kosan</span>
+        </div>
+      </div>
+
+      <div class="hero-img">
+        <img class="photo" src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=900&q=80" alt="Laundry">
+
+        <div class="status-card">
+          <small>STATUS LAUNDRY</small>
+          <p>Pesanan <b>#GCL-023</b> sedang <b>diproses.</b></p>
+          <div class="progress"><div></div></div>
+          <p class="muted" style="font-size:13px">Perkiraan selesai: hari ini, pukul 19.00</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container stats">
+      <div class="stat"><b>+120</b> <span class="muted">Pelanggan aktif/bulan</span></div>
+      <div class="stat"><b>4.8/5</b> <span class="muted">Rating kepuasan pelanggan</span></div>
+      <div class="stat"><b>3–5 jam</b> <span class="muted">Waktu yang bisa kamu hemat</span></div>
+    </div>
+  </section>
+
+  <section class="section-soft">
+    <div class="container">
+      <div class="section-title">
+        <small>PROMO & PENAWARAN</small>
+        <h2>Penawaran spesial hanya di LaundryHub</h2>
+    </div>
+
+    <div class="promo-wrapper">
+      <div class="promo-track" id="promoTrack">
+        <div class="promo-slide">
+          <div class="promo-card">
+            <span class="promo-label">PELANGGAN BARU</span>
+            <h3>Diskon 15% untuk order pertama</h3>
+            <p class="muted">
+              Daftar dan lakukan pemesanan pertama melalui website, dapatkan diskon 15%
+              untuk semua layanan kiloan Reguler & Ekspres.
+            </p>
+
+            <div class="promo-meta">
+              <span><i class="fa-regular fa-calendar"></i> Berlaku sampai akhir bulan ini</span>
+              <span><i class="fa-solid fa-tag"></i> Kode: YUKLAUNDRY26</span>
+            </div>
+
+            <a href="#order" class="btn">Pesan Sekarang</a>
+          </div>
+        </div>
+
+        <div class="promo-slide">
+          <div class="promo-card">
+            <span class="promo-label">GRATIS ANTAR JEMPUT</span>
+            <h3>Free pickup & delivery di area kampus</h3>
+            <p class="muted">
+              Untuk order minimal Rp40.000, biaya jemput dan antar kembali pakaianmu
+              sepenuhnya gratis di area layanan kampus dan kos-kosan.
+            </p>
+
+            <div class="promo-meta">
+              <span><i class="fa-regular fa-clock"></i> Berlaku setiap hari Senin–Jumat</span>
+              <span><i class="fa-solid fa-location-dot"></i> Area tertentu cek dengan admin</span>
+            </div>
+
+            <a href="#kontak" class="btn btn-outline">Cek Area Layanan</a>
+          </div>
+        </div>
+
+        <div class="promo-slide">
+          <div class="promo-card">
+            <span class="promo-label">LANGGANAN HEMAT</span>
+            <h3>Paket bulanan lebih irit sampai 20%</h3>
+            <p class="muted">
+              Gunakan Paket Hemat Bulanan untuk kamu yang rutin laundry tiap minggu.
+              Jadwal penjemputan teratur, harga lebih hemat dibanding kiloan biasa.
+            </p>
+
+            <div class="promo-meta">
+              <span><i class="fa-regular fa-calendar-check"></i> Penjemputan terjadwal mingguan</span>
+              <span><i class="fa-solid fa-wallet"></i> Cocok untuk mahasiswa & keluarga muda</span>
+            </div>
+
+            <a href="#layanan" class="btn">Lihat Paket Hemat</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="promo-arrows">
+      <button class="promo-arrow" onclick="prevPromo()">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="promo-dots">
+        <span class="promo-dot active"></span>
+        <span class="promo-dot"></span>
+        <span class="promo-dot"></span>
+      </div>
+
+      <button class="promo-arrow" onclick="nextPromo()">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+   </div>
+  </section>
+
+  <section id="layanan" class="section-blue">
+    <div class="container">
+      <div class="section-title">
+        <small>LAYANAN & HARGA</small>
+        <h2>Pilih paket laundry sesuai kebutuhanmu</h2>
+        <p class="muted">Semua harga sudah termasuk layanan antar jemput di area operasional LaundryHub.</p>
+      </div>
+
+      <div class="cards-3">
+        <div class="price-card">
+          <span class="pill">PALING FAVORIT</span>
+          <div class="price-top">
+            <div class="emoji">🧺</div>
+            <div>
+              <h3>Reguler</h3>
+              <div class="price">Rp8.000/kg</div>
+            </div>
+          </div>
+          <p class="muted">Selesai 2–3 hari kerja</p>
+          <ul>
+            <li>Cuci + kering + lipat</li>
+            <li>Cocok untuk pakaian harian</li>
+          </ul>
+          <a class="btn btn-outline" href="#order">Pilih Reguler</a>
+        </div>
+
+        <div class="price-card favorite">
+          <span class="pill">DIKEJAR WAKTU</span>
+          <div class="price-top">
+            <div class="emoji">⏱️</div>
+            <div>
+              <h3>Ekspres</h3>
+              <div class="price">Rp12.000/kg</div>
+            </div>
+          </div>
+          <p class="muted">Selesai 24 jam</p>
+          <ul>
+            <li>Prioritas antrian</li>
+            <li>Ideal untuk pekerja & mahasiswa sibuk</li>
+          </ul>
+          <a class="btn" href="#order">Pilih Ekspres</a>
+        </div>
+
+        <div class="price-card">
+          <span class="pill">SUPER CEPAT</span>
+          <div class="price-top">
+            <div class="emoji">🕘</div>
+            <div>
+              <h3>Super Ekspres</h3>
+              <div class="price">Rp15.000/kg</div>
+            </div>
+          </div>
+          <p class="muted">Selesai 6–12 jam*</p>
+          <ul>
+            <li>Khusus jenis & jumlah pakaian tertentu</li>
+            <li>Cocok saat ada acara mendadak</li>
+          </ul>
+          <a class="btn btn-outline" href="#order">Pilih Super Ekspres</a>
+        </div>
+      </div>
+
+      <div class="cards-2">
+        <div class="price-card">
+          <span class="pill">LANGGANAN BULANAN</span>
+          <div class="price-top">
+            <div class="emoji">🗓️</div>
+            <div>
+              <h3>Paket Hemat</h3>
+              <div class="price">Rp110.000/bulan</div>
+            </div>
+          </div>
+          <p class="muted">Kuota kiloan per bulan</p>
+          <ul>
+            <li>Penjemputan terjadwal tiap minggu</li>
+            <li>Cocok untuk mahasiswa & keluarga kecil</li>
+          </ul>
+          <a class="btn btn-outline" href="#order">Pilih Paket Hemat</a>
+        </div>
+
+        <div class="price-card">
+          <span class="pill">PERAWATAN KHUSUS</span>
+          <div class="price-top">
+            <div class="emoji">👚</div>
+            <div>
+              <h3>Dry Cleaning</h3>
+              <div class="price">Mulai Rp25.000/item</div>
+            </div>
+          </div>
+          <p class="muted">Untuk jas, kebaya, baju formal</p>
+          <ul>
+            <li>Metode khusus bahan sensitif</li>
+            <li>Ideal untuk pakaian kerja & acara</li>
+          </ul>
+          <a class="btn btn-outline" href="#order">Pilih Dry Cleaning</a>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:15px">
+        *Durasi layanan dapat menyesuaikan volume cucian, kondisi cuaca, dan antrean di hari tersebut.
+      </p>
+    </div>
+  </section>
+
+  <section id="cara-kerja" class="section-blue">
+    <div class="container">
+      <div class="section-title">
+        <small>CARA KERJA</small>
+        <h2>4 langkah simpel, pakaian langsung rapi</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step-card">
+          <div class="num">1</div>
+          <h3>Isi form / chat</h3>
+          <p>Masukkan nama, alamat penjemputan, nomor WhatsApp, dan jenis layanan yang kamu butuhkan.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="num">2</div>
+          <h3>Driver menjemput cucian</h3>
+          <p>Mitra GoClean datang sesuai jadwal, menimbang cucian, dan mengonfirmasi estimasi biaya.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="num">3</div>
+          <h3>Proses laundry</h3>
+          <p>Pakaian dicuci, dikeringkan, disetrika, dan dicek kualitasnya sebelum dikemas rapi.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="num">4</div>
+          <h3>Diantar kembali</h3>
+          <p>Cucian diantar ke alamatmu, pembayaran bisa tunai atau cashless lewat e-wallet/bank.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-soft">
+    <div class="container">
+      <div class="section-title">
+        <small>KEUNGGULAN LaundryHub</small>
+        <h2>Lebih praktis, higienis, dan transparan</h2>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <i class="fa-solid fa-mobile-screen"></i>
+          <h3>Full digital</h3>
+          <p>Pemesanan, konfirmasi, hingga tracking dilakukan secara online lewat website dan WhatsApp.</p>
+        </div>
+
+        <div class="feature-card">
+          <i class="fa-solid fa-truck"></i>
+          <h3>Antar jemput terjadwal</h3>
+          <p>Penjemputan dan pengantaran cucian disesuaikan dengan jadwal kuliah atau jam kerja kamu.</p>
+        </div>
+
+        <div class="feature-card">
+          <i class="fa-solid fa-leaf"></i>
+          <h3>Detergen ramah lingkungan</h3>
+          <p>Menggunakan bahan yang lebih lembut untuk pakaian dan kulit, sekaligus lebih ramah lingkungan.</p>
+        </div>
+
+        <div class="feature-card">
+          <i class="fa-solid fa-credit-card"></i>
+          <h3>Pembayaran cashless</h3>
+          <p>Bayar lebih mudah dengan e-wallet dan transfer bank tanpa harus sedia uang tunai.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order" class="order">
+    <div class="container order-grid">
+      <div>
+        <small style="letter-spacing:5px">PESAN SEKARANG</small>
+        <h2>Isi form singkat, lanjut ke WhatsApp</h2>
+        <p>
+          Kamu cukup mengisi data di form ini. Setelah dikirim, sistem akan mengarahkanmu ke
+          WhatsApp LaundryHub dengan pesan otomatis.
+        </p>
+
+        <ul>
+          <li><i class="fa-regular fa-circle-check"></i> Tanpa perlu download aplikasi</li>
+          <li><i class="fa-regular fa-circle-check"></i> Data pesanan tercatat dengan rapi</li>
+          <li><i class="fa-regular fa-circle-check"></i> Komunikasi langsung dengan admin LaundryHub</li>
+        </ul>
+      </div>
+
+      <form class="form-card" onsubmit="sendWA(event)">
+        <label>Nama</label>
+        <input id="nama" required placeholder="Nama lengkap">
+
+        <label>Lokasi Penjemputan</label>
+        <input id="alamat" required placeholder="Alamat kos/rumah/kantor">
+
+        <label>Nomor WhatsApp</label>
+        <input id="hp" required placeholder="0812xxxxxxx">
+
+        <label>Jenis Layanan</label>
+        <select id="layananForm" required>
+          <option value="" selected disabled>
+            -- Pilih layanan --
+          </option>
+
+          <option value="Reguler - Rp8.000/kg">
+            Reguler - Rp8.000/kg
+          </option>
+
+          <option value="Ekspres - Rp12.000/kg">
+            Ekspres - Rp12.000/kg
+          </option>
+
+          <option value="Super Ekspres - Rp15.000/kg">
+            Super Ekspres - Rp15.000/kg
+          </option>
+
+          <option value="Paket Hemat Bulanan - Rp110.000">
+            Paket Hemat Bulanan - Rp110.000
+          </option>
+
+          <option value="Dry Cleaning - Mulai Rp25.000/item">
+            Dry Cleaning - Mulai Rp25.000/item
+          </option>
+        </select>
+
+        <label>Catatan Tambahan (opsional)</label>
+        <textarea id="catatan" placeholder="Contoh: tolong pisahkan pakaian putih dan berwarna"></textarea>
+
+        <button class="btn" type="submit">
+          <i class="fa-brands fa-whatsapp"></i> Kirim ke WhatsApp LaundryHub
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <section id="tentang" class="section-blue about">
+    <div class="container">
+      <div class="section-title">
+        <small>TESTIMONI</small>
+        <h2>Apa kata pelanggan LaundryHub</h2>
+      </div>
+
+      <div class="testi-grid" style="margin-bottom:70px">
+        <div class="testi-card">
+          <div class="person">
+            <div class="avatar">👩🏻</div>
+            <div>
+              <h3>Dita</h3>
+              <p class="muted">Mahasiswa</p>
+            </div>
+          </div>
+          <p>"Sebagai mahasiswa yang sering pulang malam, LaundryHub ngebantu banget. Tinggal chat, cucian udah diurus sampai rapi."</p>
+        </div>
+
+        <div class="testi-card">
+          <div class="person">
+            <div class="avatar">👨🏻</div>
+            <div>
+              <h3>Raka</h3>
+              <p class="muted">Karyawan</p>
+            </div>
+          </div>
+          <p>"Lebih gampang atur waktu, karena penjemputan bisa dijadwalkan. Cocok banget buat pekerja kantoran yang sibuk."</p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <small style="letter-spacing:5px;color:#143c83">TENTANG LAUNDRYHUB</small>
+          <h2>Solusi laundry modern berbasis aplikasi</h2>
+          <p>
+            LaundryHub hadir sebagai layanan laundry antar jemput yang dirancang untuk masyarakat dengan mobilitas tinggi.
+            Melalui pemesanan digital, pelanggan bisa mengatur jadwal penjemputan dan pengantaran tanpa perlu datang ke outlet.
+          </p>
+          <p>
+            LaundryHub bekerja sama dengan mitra laundry dan mitra driver yang telah lolos seleksi,
+            sehingga kualitas pencucian dan ketepatan waktu pengantaran tetap terjaga.
+          </p>
+        </div>
+
+        <div>
+          <h2>Visi</h2>
+          <p>Menjadi layanan laundry antar jemput yang paling praktis dan terpercaya di kalangan mahasiswa, pekerja, dan keluarga muda.</p>
+
+          <h2>Misi</h2>
+          <ul>
+            <li>Menyediakan layanan laundry berkualitas dengan harga yang transparan.</li>
+            <li>Mempermudah pelanggan mengatur waktu lewat sistem pemesanan digital.</li>
+            <li>Mendukung mitra laundry dan mitra driver untuk berkembang bersama.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-soft">
+    <div class="container">
+      <div class="section-title">
+        <small>FAQ</small>
+        <h2>Pertanyaan yang sering diajukan</h2>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Di area mana saja GoClean beroperasi?</summary>
+          <p>LaundryHub beroperasi di area sekitar kampus dan kawasan kos yang telah terdaftar sebagai wilayah layanan. Informasi detail area layanan dapat dikonfirmasi langsung melalui WhatsApp saat melakukan pemesanan.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Apakah harga sudah termasuk antar jemput?</summary>
+          <p>Ya, seluruh paket yang tertera di website sudah termasuk biaya penjemputan dan pengantaran di area layanan LaundryHub, kecuali jika terdapat ketentuan khusus yang diinformasikan oleh admin sebelumnya.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Metode pembayaran apa saja yang diterima?</summary>
+          <p>LaundryHub menerima pembayaran tunai, transfer bank, dan berbagai e-wallet populer. Metode pembayaran dapat dipilih saat konfirmasi pesanan dengan admin.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak" class="section-blue contact">
+    <div class="container contact-grid">
+      <div>
+        <small style="letter-spacing:5px;color:#143c83">KONTAK</small>
+        <h2>Hubungi LaundryHub</h2>
+        <p>
+          Butuh bantuan, ingin menanyakan detail layanan, atau ingin kerja sama sebagai mitra?
+          Tim LaundryHub siap dihubungi melalui kontak berikut.
+        </p>
+
+        <div class="contact-line">
+          <div><i class="fa-brands fa-whatsapp"></i> +62 85850438127</div>
+          <div><i class="fa-brands fa-instagram"></i> @laundryhub.id</div>
+          <div><i class="fa-solid fa-location-dot"></i> Jl. Mulyosari No. 123 – Dekat area kampus</div>
+        </div>
+      </div>
+
+      <div class="map">
+        Embed Google Maps lokasi workshop LaundryHub dapat ditempatkan di sini.
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <p>© 2026 LaundryHub. Layanan laundry antar jemput berbasis aplikasi.</p>
+      <div>
+        <a href="#layanan">Layanan</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/6281234567890" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script>
+    function sendWA(e) {
+      e.preventDefault();
+
+      const nama = document.getElementById('nama').value;
+      const alamat = document.getElementById('alamat').value;
+      const hp = document.getElementById('hp').value;
+      const layanan = document.getElementById('layananForm').value;
+      const catatan = document.getElementById('catatan').value || '-';
+
+      const pesan =
+        `Halo Admin LaundryHub, saya ingin pesan laundry.%0A%0A` +
+        `Nama: ${nama}%0A` +
+        `Alamat: ${alamat}%0A` +
+        `Nomor WhatsApp: ${hp}%0A` +
+        `Layanan: ${layanan}%0A` +
+        `Catatan: ${catatan}`;
+
+      window.open(`https://wa.me/6281234567890?text=${pesan}`, '_blank');
+    }
+
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.menu a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(sec => {
+        if (scrollY >= sec.offsetTop - 140) {
+          current = sec.id;
+        }
+      });
+
+      links.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) {
+          a.classList.add('active');
+        }
+      });
+    });
+    let promoIndex = 0;
+    const promoTrack = document.getElementById('promoTrack');
+    const promoDots = document.querySelectorAll('.promo-dot');
+
+    function showPromo(index) {
+      promoIndex = index;
+
+      if (promoIndex < 0) {
+        promoIndex = 2;
+      }
+
+      if (promoIndex > 2) {
+        promoIndex = 0;
+      }
+
+      promoTrack.style.transform = `translateX(-${promoIndex * 100}%)`;
+
+      promoDots.forEach(dot => dot.classList.remove('active'));
+      promoDots[promoIndex].classList.add('active');
+    }
+
+    function nextPromo() {
+      showPromo(promoIndex + 1);
+    }
+
+    function prevPromo() {
+      showPromo(promoIndex - 1);
+    }
+
+    promoDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showPromo(index);
+      });
+    });
+  </script>
+</body>
+</html>
